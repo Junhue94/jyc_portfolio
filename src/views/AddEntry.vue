@@ -6,7 +6,7 @@
 import AddEntry from '../components/addEntry/AddEntry.vue';
 
 export default {
-  name: 'addEntryView',
+  name: 'AddEntryView',
   components: {
     AddEntry,
   },

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'addEntry',
+  name: 'AddEntry',
 };
 </script>
 

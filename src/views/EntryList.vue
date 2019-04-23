@@ -6,7 +6,7 @@
 import EntryList from '../components/entryList/EntryList.vue';
 
 export default {
-  name: 'entryListView',
+  name: 'EntryListView',
   components: {
     EntryList,
   },
