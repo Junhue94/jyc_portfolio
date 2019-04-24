@@ -63,7 +63,7 @@ export default {
   .app-side-nav {
     display: flex;
     flex-direction: column;
-    width: 220px;
+    width: 250px;
     min-height: 100vh;
     background: $background-blue;
   }
