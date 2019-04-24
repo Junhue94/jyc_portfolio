@@ -34,7 +34,7 @@ export default {
     margin-right: 50px;
     font-size: $body1-font-size;
     color: $semi-dark-gray-default;
-    font-weight: bold;
+    font-weight: $bold;
     cursor: pointer;
   }
 
