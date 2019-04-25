@@ -4,7 +4,7 @@
       <img class="profile-image" src="../../assets/straw_hat_icon.png" alt="User Avatar"/>
       <div class="profile-name">Name</div>
     </div>
-    <router-link :to="{ name: 'addEntry' }">
+    <router-link :to="{ name: 'entryList' }">
       <div
         class="menu-item"
         :class="{ active: activeItem === 'entryList' }"
@@ -22,14 +22,16 @@
       <font-awesome-icon icon="copy" class="icon" />
       <span>Migration History</span>
     </div>
-    <div
-      class="menu-item"
-      :class="{ active: activeItem === 'addEntry' }"
-      @click="onMenuItemClick('addEntry')"
-    >
-      <font-awesome-icon icon="database" class="icon" />
-      <span>Add Entry</span>
-    </div>
+    <router-link :to="{ name: 'addEntry' }">
+      <div
+        class="menu-item"
+        :class="{ active: activeItem === 'addEntry' }"
+        @click="onMenuItemClick('addEntry')"
+      >
+        <font-awesome-icon icon="database" class="icon" />
+        <span>Add Entry</span>
+      </div>
+    </router-link>
     <div
       class="menu-item"
       :class="{ active: activeItem === 'import' }"

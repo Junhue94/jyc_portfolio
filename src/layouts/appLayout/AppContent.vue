@@ -18,6 +18,7 @@ export default {
   .app-content {
     min-height: calc(100vh - 60px);
     display: flex;
+    flex-direction: column;
   }
 
   // Transition Class
