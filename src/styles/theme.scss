@@ -1,7 +1,8 @@
-// Colors
+// Color
 $background-dark-blue: #293846;
 $background-blue: #2F4050;
 $background-light-gray: #F3F3F4;
+$background-white: #FFFFFF;
 
 $green-default: #1AB394;
 $blue-default: #1C84C6;
@@ -16,10 +17,14 @@ $dark-gray-default: #484B4F;
 // Font Family
 $font-default: Roboto, sans-serif;
 
-// Font Sizes
+// Font Size
 $h1-font-size: 26px;
 $h2-font-size: 20px;
 $h3-font-size: 16px;
 $body1-font-size: 13px;
 $body2-font-size: 12px;
 $footer-font-size: 10px;
+
+// Font Weight
+$bold: 700;
+$semi-bold: 500;

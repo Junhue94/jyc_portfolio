@@ -18,12 +18,9 @@ export default {
 
   .app-header {
     height: 60px;
-    width: calc(100% - 220px);
-    margin-left: 220px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    position: fixed;
     background-color: $background-light-gray;
   }
 
@@ -34,7 +31,7 @@ export default {
     margin-right: 50px;
     font-size: $body1-font-size;
     color: $semi-dark-gray-default;
-    font-weight: bold;
+    font-weight: $bold;
     cursor: pointer;
   }
 
