@@ -30,7 +30,7 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    width: calc(100% - 250px);
-    margin-left: 250px;
+    width: calc(100% - 220px);
+    margin-left: 220px;
   }
 </style>

@@ -65,7 +65,7 @@ export default {
   .app-side-nav {
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 220px;
     min-height: 100vh;
     background: $background-blue;
   }
@@ -94,7 +94,7 @@ export default {
   .menu-item {
     display: flex;
     align-items: center;
-    padding: 18px 25px;
+    padding: 15px 25px;
     border-bottom: 1px solid $gray-default;
     cursor: pointer;
     transition: all 0.2s ease-in-out;

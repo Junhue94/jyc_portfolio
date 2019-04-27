@@ -16,7 +16,7 @@ import Vue from 'vue';
 
 // Local Files
 import App from './App.vue';
-import router from './router/index';
+import router from './router';
 import store from './store';
 import './registerServiceWorker';
 
