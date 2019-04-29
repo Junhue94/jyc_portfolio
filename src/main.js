@@ -18,12 +18,15 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import filters from './filters';
 import './registerServiceWorker';
 
 // Fonts
 library.add(faSignOutAlt, faThLarge, faDatabase, faUpload, faCopy);
-
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+// Use third-party modules in Vue
+Vue.use(filters);
 
 Vue.config.productionTip = false;
 

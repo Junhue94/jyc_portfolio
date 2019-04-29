@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import AddEntry from '../components/addEntry/AddEntry.vue';
+import AddEntry from '../components/addEntry/AddEntry';
 
 export default {
   name: 'AddEntryView',
