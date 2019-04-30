@@ -1,12 +1,14 @@
 <template>
   <content-page :header="header" :title="title">
     <template slot="content">
-      <list-table
-        :headerList="stockListHeaders"
-        :dataList="entryList"
-        :findList="getEntryList"
-        :queryParams="entryListParams"
-      />
+      <div class="container">
+        <list-table
+          :headerList="stockListHeaders"
+          :dataList="entryList"
+          :findList="getEntryList"
+          :queryParams="entryListParams"
+        />
+      </div>
     </template>
   </content-page>
 </template>
@@ -14,7 +16,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import ContentPage from '../common/ContentPage';
-import ListTable from '../common/ListTable.vue';
+import ListTable from '../common/ListTable';
 import { logError } from '../../utils/logger';
 import { toastServerError } from '../../utils/toaster';
 
@@ -129,5 +131,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+  @import "../../styles/theme";
+  .container {
+    padding: 20px;
+  }
 </style>

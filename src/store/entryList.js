@@ -1,4 +1,6 @@
 import apiService from '../api';
+import { ENTRY_LIST_ROUTE } from '../api/constants';
+import { getQueryParams } from '../utils/helper';
 
 const getDefaultState = () => ({
   entryId: null,
@@ -35,7 +37,7 @@ const mutations = {
   'SET_ENTRY_LIST'(state, entryList) {
     state.entryList = [...entryList];
   },
-  'SET_STOCK_LIST_PARAMS'(state, entryListParams) {
+  'SET_ENTRY_LIST_PARAMS'(state, entryListParams) {
     state.entryListParams = { ...entryListParams };
   },
   'CLEAR_ALL_STATE'(state) {
@@ -46,12 +48,12 @@ const mutations = {
 };
 
 const actions = {
-  getEntryList({ commit }) {
-    return apiService.get('/entryList')
-      .then((res) => {
-        console.log('actions res', res);
-        commit('SET_ENTRY_LIST', res.data);
-        return res;
+  getEntryList({ commit }, options) {
+    return apiService.get(ENTRY_LIST_ROUTE, { params: options })
+      .then(({ data }) => {
+        commit('SET_ENTRY_LIST', data.data);
+        commit('SET_ENTRY_LIST_PARAMS', getQueryParams(data));
+        return data;
       });
   },
   clearState({ commit }) {

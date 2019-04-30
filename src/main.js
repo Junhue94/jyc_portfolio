@@ -15,7 +15,7 @@ import {
 import Vue from 'vue';
 
 // Local Files
-import App from './App.vue';
+import App from './App';
 import router from './router';
 import store from './store';
 import filters from './filters';

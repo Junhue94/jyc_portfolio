@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Login from '../components/login/Login.vue';
+import Login from '../components/login/Login';
 
 export default {
   name: 'LoginView',

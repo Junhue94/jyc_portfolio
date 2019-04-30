@@ -11,17 +11,36 @@ const apiService = axios.create({
 
 const mockApiService = new MockAdapter(apiService);
 
+// mockApiService
+//   .onGet(ENTRY_LIST_ROUTE)
+//   .reply(200, GET_ENTRY_LIST);
+
 mockApiService
   .onGet(ENTRY_LIST_ROUTE)
-  .reply(200, GET_ENTRY_LIST);
-
-// Handle Params
-// mock.onGet('/api').reply(function(config) {
-//   if (config.params.name === 'Bob') { // or check for deep equality with config.params
-//     return [200, 'Hello'];
-//   } else {
-//     return [400];
-//   }
-// });
+  .reply((config) => {
+    if (config.params) {
+      const {
+        offset,
+        currentPage,
+        sortField,
+        sortSeq,
+        filter,
+      } = config.params;
+      return [
+        200,
+        {
+          offset,
+          currentPage,
+          totalRows: 500,
+          totalPage: 5,
+          sortField,
+          sortSeq,
+          filter,
+          data: GET_ENTRY_LIST,
+        },
+      ];
+    }
+    return [400];
+  });
 
 export default apiService;

@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import AppSideNav from './AppSideNav.vue';
-import AppHeader from './AppHeader.vue';
-import AppContent from './AppContent.vue';
+import AppSideNav from './AppSideNav';
+import AppHeader from './AppHeader';
+import AppContent from './AppContent';
 
 export default {
   name: 'AppLayout',

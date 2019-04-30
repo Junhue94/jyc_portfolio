@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import EntryList from '../components/entryList/EntryList.vue';
+import EntryList from '../components/entryList/EntryList';
 
 export default {
   name: 'EntryListView',

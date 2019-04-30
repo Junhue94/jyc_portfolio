@@ -4,6 +4,6 @@ export default [
   {
     path: baseUri,
     name: 'entryList',
-    component: () => import(/* webpackChunkName: "entryList" */ '../views/EntryList.vue'),
+    component: () => import(/* webpackChunkName: "entryList" */ '../views/EntryList'),
   },
 ];

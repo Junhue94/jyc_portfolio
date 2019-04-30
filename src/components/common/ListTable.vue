@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list-table">
     <div class="table-responsive">
       <table class="table table-bordered table-striped">
         <thead>
@@ -27,10 +27,10 @@
       </table>
     </div>
 
-    <div class="row paginate">
-      <div class="col-sm-4">
-        <div class="input-group row-offset">
-          <span class="input-group-addon">Rows</span>
+    <div class="table-paginate">
+      <div class="offset">
+        <span>Rows</span>
+        <label>
           <select
             class="form-control"
             title="rowOffset"
@@ -41,36 +41,54 @@
             <option value="200">200</option>
             <option value="0">All</option>
           </select>
-        </div>
+        </label>
       </div>
-      <div class="col-sm-8">
+      <div class="">
         <nav class="pull-right">
           <ul class="pagination">
             <li
+              class="page-item"
               :class="{ active: isFirstPage }"
               @click="changePage(1)"
-            ><a><span>&laquo;</span></a>
+            >
+              <a class="page-link">
+                <span>&laquo;</span>
+              </a>
             </li>
             <li
+              class="page-item"
               :class="{ disabled: isFirstPage }"
               @click="changePage('previous')"
-            ><a><span>&nbsp;&lsaquo;</span></a>
+            >
+              <a class="page-link">
+                <span>&nbsp;&lsaquo;</span>
+              </a>
             </li>
             <li
+              class="page-item"
               v-for="page in pageRange"
               :class="{ active: page === queryParams.currentPage }"
               @click="changePage(page)"
-            ><a>{{ page }}</a>
+            >
+              <a class="page-link">{{ page }}</a>
             </li>
             <li
+              class="page-item"
               :class="{ disabled: isLastPage }"
               @click="changePage('next')"
-            ><a><span>&rsaquo;&nbsp;</span></a>
+            >
+              <a class="page-link">
+                <span>&rsaquo;&nbsp;</span>
+              </a>
             </li>
             <li
+              class="page-item"
               :class="{ active: isLastPage }"
               @click="changePage(queryParams.totalPage)"
-            ><a><span>&raquo;</span></a>
+            >
+              <a class="page-link">
+                <span>&raquo;</span>
+              </a>
             </li>
           </ul>
         </nav>
@@ -102,6 +120,10 @@ export default {
     };
   },
   watch: {
+    // initialize pagination after fetch query params from API
+    'queryParams.totalPage'() {
+      this.changePage(1);
+    },
     // watch page offset to fetch data from API
     'queryParams.offset'(newValue, oldValue) {
       if (parseInt(newValue, 10) !== parseInt(oldValue, 10)) {
@@ -191,6 +213,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  @import "../../styles/theme";
   table.table.table-bordered {
     margin: 0;
 
@@ -199,7 +222,7 @@ export default {
         th {
           text-align: center;
           vertical-align: middle;
-          font-size: 12px;
+          font-size: $body2-font-size;
           cursor: pointer;
         }
       }
@@ -212,21 +235,25 @@ export default {
         td {
           text-align: center;
           vertical-align: middle;
-          font-size: 12px;
+          font-size: $body2-font-size;
         }
       }
     }
   }
 
-  .paginate {
-    .row-offset {
-      margin-top: 30px;
+  .table-paginate {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    .offset {
+      span {
+        margin-right: 10px;
+      }
     }
 
     nav {
       ul.pagination {
-        margin: 30px 0 0 0;
-
         li {
           cursor: pointer;
         }
