@@ -42,7 +42,7 @@ export default {
     flex: 1;
     flex-direction: column;
     margin: 30px;
-    border-radius: 5px;
+    border-radius: $border-radius-default;
     background: $background-white;
   }
 

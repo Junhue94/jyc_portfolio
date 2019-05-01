@@ -7,7 +7,7 @@
           <th
             class="header"
             v-for="header in headerList"
-            @click="findList({ sortField: header.field, sortSeq: setSortSeq(header.field) })"
+            @click="getList({ sortField: header.field, sortSeq: setSortSeq(header.field) })"
           >{{ header.name }}
           </th>
         </tr>
@@ -27,79 +27,79 @@
       </table>
     </div>
 
+    <div class="entry-count">
+      Showing {{ currentEntryFirstIndex }}
+      to {{ currentEntryLastIndex }}
+      of {{ queryParams.totalRows }} entries
+    </div>
+
     <div class="table-paginate">
       <div class="offset">
-        <span>Rows</span>
-        <label>
-          <select
-            class="form-control"
-            title="rowOffset"
-            v-model="queryParams.offset"
+        <select-dropdown
+          :label="rowPerPageLabel"
+          :options="rowPerPageOptions"
+        />
+      </div>
+      <nav>
+        <ul class="pagination">
+          <li
+            class="page-item"
+            :class="{ active: isFirstPage }"
+            @click="changePage(1)"
           >
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
-            <option value="0">All</option>
-          </select>
-        </label>
-      </div>
-      <div class="">
-        <nav class="pull-right">
-          <ul class="pagination">
-            <li
-              class="page-item"
-              :class="{ active: isFirstPage }"
-              @click="changePage(1)"
-            >
-              <a class="page-link">
-                <span>&laquo;</span>
-              </a>
-            </li>
-            <li
-              class="page-item"
-              :class="{ disabled: isFirstPage }"
-              @click="changePage('previous')"
-            >
-              <a class="page-link">
-                <span>&nbsp;&lsaquo;</span>
-              </a>
-            </li>
-            <li
-              class="page-item"
-              v-for="page in pageRange"
-              :class="{ active: page === queryParams.currentPage }"
-              @click="changePage(page)"
-            >
-              <a class="page-link">{{ page }}</a>
-            </li>
-            <li
-              class="page-item"
-              :class="{ disabled: isLastPage }"
-              @click="changePage('next')"
-            >
-              <a class="page-link">
-                <span>&rsaquo;&nbsp;</span>
-              </a>
-            </li>
-            <li
-              class="page-item"
-              :class="{ active: isLastPage }"
-              @click="changePage(queryParams.totalPage)"
-            >
-              <a class="page-link">
-                <span>&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+            <a class="page-link">
+              <span>&laquo;</span>
+            </a>
+          </li>
+          <li
+            class="page-item"
+            :class="{ disabled: isFirstPage }"
+            @click="changePage('previous')"
+          >
+            <a class="page-link">
+              <span>&nbsp;&lsaquo;</span>
+            </a>
+          </li>
+          <li
+            class="page-item"
+            v-for="page in pageRange"
+            :class="{ active: page === queryParams.currentPage }"
+            @click="changePage(page)"
+          >
+            <a class="page-link">{{ page }}</a>
+          </li>
+          <li
+            class="page-item"
+            :class="{ disabled: isLastPage }"
+            @click="changePage('next')"
+          >
+            <a class="page-link">
+              <span>&rsaquo;&nbsp;</span>
+            </a>
+          </li>
+          <li
+            class="page-item"
+            :class="{ active: isLastPage }"
+            @click="changePage(queryParams.totalPage)"
+          >
+            <a class="page-link">
+              <span>&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import _ from 'lodash';
+import range from 'lodash/range';
+import SelectDropdown from './SelectDropdown';
+import {
+  ROW_PER_PAGE_LABEL,
+  ROW_PER_PAGE_OPTIONS,
+} from '../../utils/constants';
 
 export default {
   name: 'ListTable',
@@ -107,9 +107,12 @@ export default {
     'headerList',
     'dataList',
     'onDataListClick',
-    'findList',
+    'getList',
     'queryParams',
   ],
+  components: {
+    selectDropdown: SelectDropdown,
+  },
   data() {
     return {
       sortField: null,
@@ -117,6 +120,8 @@ export default {
       isFirstPage: true,
       isLastPage: false,
       pageRange: [],
+      rowPerPageLabel: ROW_PER_PAGE_LABEL,
+      rowPerPageOptions: ROW_PER_PAGE_OPTIONS,
     };
   },
   watch: {
@@ -128,7 +133,7 @@ export default {
     'queryParams.offset'(newValue, oldValue) {
       if (parseInt(newValue, 10) !== parseInt(oldValue, 10)) {
         // set to first page when offset changes
-        this.findList({ offset: parseInt(newValue, 10), currentPage: 1 });
+        this.getList({ offset: parseInt(newValue, 10), currentPage: 1 });
       }
     },
     // watch current page to disable pagination buttons
@@ -190,20 +195,30 @@ export default {
 
       // set page range
       if (totalPage <= 5) {
-        this.pageRange = _.range(1, totalPage + 1);
+        this.pageRange = range(1, totalPage + 1);
       } else if (newPage + 2 >= totalPage) {
         const pages = (newPage - 2 <= totalPage - 4) ? newPage - 2 : totalPage - 4;
-        this.pageRange = _.range(pages, totalPage + 1);
+        this.pageRange = range(pages, totalPage + 1);
       } else if (newPage - 2 <= 1) {
         const pages = (newPage + 3 >= 6) ? newPage + 3 : 6;
-        this.pageRange = _.range(1, pages);
+        this.pageRange = range(1, pages);
       } else {
-        this.pageRange = _.range(newPage - 2, newPage + 3);
+        this.pageRange = range(newPage - 2, newPage + 3);
       }
 
       if (newPage >= 1 && newPage <= totalPage && newPage !== currentPage) {
-        this.findList({ offset, currentPage: newPage });
+        this.getList({ offset, currentPage: newPage });
       }
+    },
+  },
+  computed: {
+    currentEntryFirstIndex() {
+      const { currentPage, offset } = this.queryParams;
+      return (currentPage - 1) * offset + 1;
+    },
+    currentEntryLastIndex() {
+      const { currentPage, offset } = this.queryParams;
+      return currentPage * offset;
     },
   },
   created() {
@@ -241,8 +256,15 @@ export default {
     }
   }
 
+  .entry-count {
+    margin-top: 30px;
+    color: $dark-gray-default;
+    font-size: $body1-font-size;
+  }
+
   .table-paginate {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-top: 30px;
 
@@ -254,6 +276,8 @@ export default {
 
     nav {
       ul.pagination {
+        margin: 0;
+
         li {
           cursor: pointer;
         }

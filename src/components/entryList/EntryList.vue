@@ -3,9 +3,9 @@
     <template slot="content">
       <div class="container">
         <list-table
-          :headerList="stockListHeaders"
+          :headerList="entryListHeaders"
           :dataList="entryList"
-          :findList="getEntryList"
+          :getList="getEntryList"
           :queryParams="entryListParams"
         />
       </div>
@@ -30,7 +30,7 @@ export default {
     return {
       header: 'Entry List',
       title: 'Entry List with Filters',
-      stockListHeaders: [
+      entryListHeaders: [
         {
           field: 'type',
           name: 'Type',

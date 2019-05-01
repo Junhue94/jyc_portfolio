@@ -18,7 +18,7 @@ const getDefaultState = () => ({
   },
   entryList: [],
   entryListParams: {
-    offset: 50,
+    offset: 25,
     totalRows: null,
     currentPage: 1,
     totalPage: null,
