@@ -4,6 +4,7 @@
     <label>
       <select
         title="rowOffset"
+        @change="handleDropdownChange"
       >
         <option
           v-for="option in options"
@@ -18,9 +19,17 @@
 export default {
   name: 'SelectDropdown',
   props: [
+    'field',
     'label',
     'options',
+    'onChange',
   ],
+  methods: {
+    handleDropdownChange(e) {
+      e.preventDefault();
+      this.onChange(e.target.value);
+    },
+  },
 };
 </script>
 

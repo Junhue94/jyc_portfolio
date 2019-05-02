@@ -16,7 +16,7 @@
         <tr
           class="data"
           v-for="data in dataList"
-          @click="onDataListClick(data._id)"
+          @click="onDataListClick(data.id)"
         >
           <td
             v-for="header in headerList"
@@ -38,6 +38,7 @@
         <select-dropdown
           :label="rowPerPageLabel"
           :options="rowPerPageOptions"
+          :onChange="handleOffsetChange"
         />
       </div>
       <nav>
@@ -158,6 +159,12 @@ export default {
         return Vue.filter(filter)(value);
       }
       return value;
+    },
+    handleOffsetChange(value) {
+      this.getList({
+        ...this.queryParams,
+        offset: value,
+      });
     },
     setSortSeq(sortField) {
       if (this.sortField === sortField) {

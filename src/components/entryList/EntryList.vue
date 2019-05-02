@@ -2,12 +2,31 @@
   <content-page :header="header" :title="title">
     <template slot="content">
       <div class="container">
-        <list-table
-          :headerList="entryListHeaders"
-          :dataList="entryList"
-          :getList="getEntryList"
-          :queryParams="entryListParams"
-        />
+        <div class="filter-container">
+          <select-dropdown
+            :label="filterTypeHeader"
+            :options="filterTypeOptions"
+            :onChange="handleTypeChange"
+          />
+          <select-dropdown
+            :label="filterCountryHeader"
+            :options="filterCountryOptions"
+            :onChange="handleCountryChange"
+          />
+          <select-dropdown
+            :label="filterSectorHeader"
+            :options="filterSectorOptions"
+            :onChange="handleSectorChange"
+          />
+        </div>
+        <div class="table-container">
+          <list-table
+            :headerList="entryListHeaders"
+            :dataList="entryList"
+            :getList="getEntryList"
+            :queryParams="entryListParams"
+          />
+        </div>
       </div>
     </template>
   </content-page>
@@ -17,17 +36,33 @@
 import { mapActions, mapGetters } from 'vuex';
 import ContentPage from '../common/ContentPage';
 import ListTable from '../common/ListTable';
+import SelectDropdown from '../common/SelectDropdown';
 import { logError } from '../../utils/logger';
 import { toastServerError } from '../../utils/toaster';
+import {
+  ENTRY_TYPE_LABEL,
+  ENTRY_TYPE_ENUM,
+  COUNTRY_LABEL,
+  COUNTRY_ENUM,
+  SECTOR_LABEL,
+  ENTRY_SECTOR_ENUM,
+} from '../../utils/constants';
 
 export default {
   name: 'EntryList',
   components: {
     contentPage: ContentPage,
     listTable: ListTable,
+    selectDropdown: SelectDropdown,
   },
   data() {
     return {
+      filterTypeHeader: ENTRY_TYPE_LABEL,
+      filterTypeOptions: ENTRY_TYPE_ENUM,
+      filterCountryHeader: COUNTRY_LABEL,
+      filterCountryOptions: COUNTRY_ENUM,
+      filterSectorHeader: SECTOR_LABEL,
+      filterSectorOptions: ENTRY_SECTOR_ENUM,
       header: 'Entry List',
       title: 'Entry List with Filters',
       entryListHeaders: [
@@ -110,6 +145,30 @@ export default {
           toastServerError();
         });
     },
+    handleTypeChange(value) {
+      this.getEntryList({
+        ...this.entryListParams,
+        filter: {
+          type: value,
+        },
+      });
+    },
+    handleCountryChange(value) {
+      this.getEntryList({
+        ...this.entryListParams,
+        filter: {
+          country: value,
+        },
+      });
+    },
+    handleSectorChange(value) {
+      this.getEntryList({
+        ...this.entryListParams,
+        filter: {
+          sector: value,
+        },
+      });
+    },
   },
   computed: {
     ...mapGetters('entryList', {
@@ -133,6 +192,18 @@ export default {
 <style scoped lang="scss">
   @import "../../styles/theme";
   .container {
+    padding: 0;
+  }
+
+  .filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 2px solid $background-light-gray;;
+  }
+
+  .table-container {
     padding: 20px;
   }
 </style>
