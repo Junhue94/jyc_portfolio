@@ -65,6 +65,8 @@ export default {
   .app-side-nav {
     display: flex;
     flex-direction: column;
+    position: fixed;
+    bottom: 0;
     width: 220px;
     min-height: 100vh;
     background: $background-blue;
@@ -107,6 +109,7 @@ export default {
     span {
       color: $gray-default;
       font-weight: $bold;
+      font-size: $h3-font-size;
     }
   }
 

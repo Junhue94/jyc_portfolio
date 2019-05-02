@@ -3,8 +3,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 // Layouts
-import LoginLayout from '../layouts/loginLayout/LoginLayout.vue';
-import AppLayout from '../layouts/appLayout/AppLayout.vue';
+import LoginLayout from '../layouts/loginLayout/LoginLayout';
+import AppLayout from '../layouts/appLayout/AppLayout';
 
 // Routes
 import routeLogin from './login';
@@ -36,13 +36,13 @@ export default new Router({
           // route level code-splitting
           // this generates a separate chunk (about.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "index" */ '../views/Home.vue'),
+          component: () => import(/* webpackChunkName: "index" */ '../views/Home'),
         },
       ],
     },
     {
       path: '*',
-      component: () => import(/* webpackChunkName: "catchAll" */ '../views/Home.vue'),
+      component: () => import(/* webpackChunkName: "catchAll" */ '../views/Home'),
     },
   ],
 });
