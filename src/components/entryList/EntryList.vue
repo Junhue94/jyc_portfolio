@@ -57,14 +57,14 @@ export default {
   },
   data() {
     return {
+      header: 'Entry List',
+      title: 'Entry List with Filters',
       filterTypeHeader: ENTRY_TYPE_LABEL,
       filterTypeOptions: ENTRY_TYPE_ENUM,
       filterCountryHeader: COUNTRY_LABEL,
       filterCountryOptions: COUNTRY_ENUM,
       filterSectorHeader: SECTOR_LABEL,
       filterSectorOptions: ENTRY_SECTOR_ENUM,
-      header: 'Entry List',
-      title: 'Entry List with Filters',
       entryListHeaders: [
         {
           field: 'type',
@@ -200,7 +200,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-bottom: 2px solid $background-light-gray;;
+    border-bottom: 2px solid $background-light-gray;
   }
 
   .table-container {

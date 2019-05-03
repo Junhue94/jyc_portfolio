@@ -7,7 +7,7 @@
     <router-link :to="{ name: 'entryList' }">
       <div
         class="menu-item"
-        :class="{ active: activeItem === 'entryList' }"
+        :class="{ isActive: activeItem === 'entryList' }"
         @click="onMenuItemClick('entryList')"
       >
         <font-awesome-icon icon="th-large" class="icon" />
@@ -16,7 +16,7 @@
     </router-link>
     <div
       class="menu-item"
-      :class="{ active: activeItem === 'migrationHistory' }"
+      :class="{ isActive: activeItem === 'migrationHistory' }"
       @click="onMenuItemClick('migrationHistory')"
     >
       <font-awesome-icon icon="copy" class="icon" />
@@ -25,7 +25,7 @@
     <router-link :to="{ name: 'addEntry' }">
       <div
         class="menu-item"
-        :class="{ active: activeItem === 'addEntry' }"
+        :class="{ isActive: activeItem === 'addEntry' }"
         @click="onMenuItemClick('addEntry')"
       >
         <font-awesome-icon icon="database" class="icon" />
@@ -34,7 +34,7 @@
     </router-link>
     <div
       class="menu-item"
-      :class="{ active: activeItem === 'import' }"
+      :class="{ isActive: activeItem === 'import' }"
       @click="onMenuItemClick('import')"
     >
       <font-awesome-icon icon="upload" class="icon" />
@@ -113,7 +113,7 @@ export default {
     }
   }
 
-  .active {
+  .isActive {
     background: $background-dark-blue;
     border-left: 5px solid $green-default;
   }
