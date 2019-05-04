@@ -45,7 +45,7 @@ import {
   COUNTRY_LABEL,
   COUNTRY_ENUM,
   SECTOR_LABEL,
-  ENTRY_SECTOR_ENUM,
+  SECTOR_ENUM,
 } from '../../utils/constants';
 
 export default {
@@ -64,7 +64,7 @@ export default {
       filterCountryHeader: COUNTRY_LABEL,
       filterCountryOptions: COUNTRY_ENUM,
       filterSectorHeader: SECTOR_LABEL,
-      filterSectorOptions: ENTRY_SECTOR_ENUM,
+      filterSectorOptions: SECTOR_ENUM,
       entryListHeaders: [
         {
           field: 'type',

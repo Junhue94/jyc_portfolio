@@ -104,13 +104,29 @@ import {
 
 export default {
   name: 'ListTable',
-  props: [
-    'headerList',
-    'dataList',
-    'onDataListClick',
-    'getList',
-    'queryParams',
-  ],
+  props: {
+    headerList: {
+      type: Array,
+      required: true,
+    },
+    dataList: {
+      type: Array,
+      required: true,
+    },
+    onDataListClick: {
+      type: Function,
+      default() {
+        return null;
+      },
+    },
+    getList: {
+      type: Function,
+      default() {
+        return null;
+      },
+    },
+    queryParams: Object,
+  },
   components: {
     selectDropdown: SelectDropdown,
   },

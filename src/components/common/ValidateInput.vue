@@ -19,12 +19,20 @@
 <script>
 export default {
   name: 'ValidateInput',
-  props: [
-    'label',
-    'validationRules',
-    'inputType',
-    'onChange',
-  ],
+  props: {
+    label: {
+      type: String,
+      required: true,
+    },
+    validationRules: String,
+    inputType: String,
+    onChange: {
+      type: Function,
+      default() {
+        return null;
+      },
+    },
+  },
   methods: {
     onInputChange(e) {
       e.preventDefault();

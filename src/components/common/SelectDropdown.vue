@@ -18,12 +18,23 @@
 <script>
 export default {
   name: 'SelectDropdown',
-  props: [
-    'field',
-    'label',
-    'options',
-    'onChange',
-  ],
+  props: {
+    field: String,
+    label: {
+      type: String,
+      required: true,
+    },
+    options: {
+      type: Array,
+      required: true,
+    },
+    onChange: {
+      type: Function,
+      default() {
+        return null;
+      },
+    },
+  },
   methods: {
     handleDropdownChange(e) {
       e.preventDefault();

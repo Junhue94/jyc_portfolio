@@ -27,12 +27,23 @@
 <script>
 export default {
   name: 'ValidateSelectSingle',
-  props: [
-    'label',
-    'validationRules',
-    'options',
-    'onChange',
-  ],
+  props: {
+    label: {
+      type: String,
+      required: true,
+    },
+    validationRules: String,
+    options: {
+      type: Array,
+      required: true,
+    },
+    onChange: {
+      type: Function,
+      default() {
+        return null;
+      },
+    },
+  },
   methods: {
     onSelectChange(e) {
       e.preventDefault();

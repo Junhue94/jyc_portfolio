@@ -11,10 +11,16 @@
 <script>
 export default {
   name: 'ContentPage',
-  props: [
-    'header',
-    'title',
-  ],
+  props: {
+    header: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>
 

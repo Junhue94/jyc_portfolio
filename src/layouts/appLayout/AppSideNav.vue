@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import has from 'lodash/has';
+
 export default {
   name: 'AppSideNav',
   data() {
@@ -55,6 +57,11 @@ export default {
     onMenuItemClick(item) {
       this.activeItem = item;
     },
+  },
+  created() {
+    if (has(this.$router, 'history.current.name')) {
+      this.activeItem = this.$router.history.current.name;
+    }
   },
 };
 </script>

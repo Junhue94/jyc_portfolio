@@ -12,10 +12,18 @@
 <script>
 export default {
   name: 'SelectPill',
-  props: [
-    'options',
-    'onChange',
-  ],
+  props: {
+    options: {
+      type: Array,
+      required: true,
+    },
+    onChange: {
+      type: Function,
+      default() {
+        return null;
+      },
+    },
+  },
   data() {
     return {
       activeItem: null,
