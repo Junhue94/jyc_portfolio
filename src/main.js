@@ -33,7 +33,6 @@ Vue.use(VeeValidate, {
     valid: 'is-valid',
     invalid: 'is-invalid',
   },
-  validity: true,
 });
 Vue.use(filters);
 

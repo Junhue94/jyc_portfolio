@@ -14,6 +14,7 @@ export default {
   name: 'SelectPill',
   props: [
     'options',
+    'onChange',
   ],
   data() {
     return {
@@ -23,11 +24,13 @@ export default {
   methods: {
     onOptionClick(item) {
       this.activeItem = item;
+      this.onChange(item);
     },
   },
   created() {
     const [firstOption] = this.options;
     this.activeItem = firstOption;
+    this.onChange(firstOption);
   },
 };
 </script>

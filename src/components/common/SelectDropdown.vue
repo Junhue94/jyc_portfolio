@@ -3,7 +3,7 @@
     <div class="label">{{ label }}</div>
     <label>
       <select
-        title="rowOffset"
+        :title="label"
         @change="handleDropdownChange"
       >
         <option

@@ -2,15 +2,23 @@
   <div class="validate-input">
     <label>{{ label }}</label>
     <div class="input-container">
-      <input
+      <select
         :name="label"
-        :type="inputType"
-        :placeholder="label"
+        :title="label"
         class="form-control"
         v-validate="validationRules"
-        @change="onInputChange"
-        autocomplete="off"
-      />
+        @change="onSelectChange"
+      >
+        <option
+          value=""
+          disabled
+          selected
+        >Select a {{ label }}</option>
+        <option
+          v-for="option in options"
+          :value="option"
+        >{{ option }}</option>
+      </select>
       <span>{{ errors.first(label) }}</span>
     </div>
   </div>
@@ -18,15 +26,15 @@
 
 <script>
 export default {
-  name: 'ValidateInput',
+  name: 'ValidateSelectSingle',
   props: [
     'label',
     'validationRules',
-    'inputType',
+    'options',
     'onChange',
   ],
   methods: {
-    onInputChange(e) {
+    onSelectChange(e) {
       e.preventDefault();
       this.onChange(this.label, e.target.value);
     },
@@ -53,10 +61,9 @@ export default {
       flex-direction: column;
       width: 80%;
 
-      input {
-        &::placeholder {
-          font-size: $h3-font-size;
-        }
+      select {
+        color: $dark-gray-default;
+        font-size: $h3-font-size;
       }
 
       span {

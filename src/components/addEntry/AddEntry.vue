@@ -3,19 +3,22 @@
     <template slot="content">
       <div class="container">
         <div class="type-container">
-          <select-pill :options="typeOptions" />
+          <select-pill
+            :options="typeEnum"
+            :onChange="setType"
+          />
         </div>
         <div class="form-container">
           <form @submit.prevent="validateForm">
             <validate-input
               :inputType="'text'"
-              :label="typeLabel"
+              :label="companyLabel"
               :validationRules="'required'"
               :onChange="updateFormData"
             />
-            <validate-input
-              :inputType="'text'"
-              :label="companyLabel"
+            <validate-select-single
+              :label="countryLabel"
+              :options="countryEnum"
               :validationRules="'required'"
               :onChange="updateFormData"
             />
@@ -31,10 +34,12 @@
 import ContentPage from '../common/ContentPage';
 import SelectPill from '../common/SelectPill';
 import ValidateInput from '../common/ValidateInput';
+import ValidateSelectSingle from '../common/ValidateSelectSingle';
 import {
+  COUNTRY_ENUM,
+  COUNTRY_LABEL,
   COMPANY_LABEL,
   ENTRY_TYPE_ENUM,
-  ENTRY_TYPE_LABEL,
 } from '../../utils/constants';
 
 export default {
@@ -43,28 +48,35 @@ export default {
     contentPage: ContentPage,
     selectPill: SelectPill,
     validateInput: ValidateInput,
+    validateSelectSingle: ValidateSelectSingle,
   },
   data() {
     return {
       header: 'Add Entry',
       title: 'Fill in data for new entry',
-      typeOptions: ENTRY_TYPE_ENUM,
+      // Enums
+      typeEnum: ENTRY_TYPE_ENUM,
+      countryEnum: COUNTRY_ENUM,
       // Form label
-      typeLabel: ENTRY_TYPE_LABEL,
       companyLabel: COMPANY_LABEL,
+      countryLabel: COUNTRY_LABEL,
       // Form data model
       type: null,
       companyName: null,
+      country: null,
     };
   },
   methods: {
+    setType(type) {
+      this.type = type;
+    },
     updateFormData(label, value) {
       switch (label) {
-        case ENTRY_TYPE_LABEL:
-          this.type = value;
-          break;
         case COMPANY_LABEL:
           this.companyName = value;
+          break;
+        case COUNTRY_LABEL:
+          this.country = value;
           break;
         default:
           break;
@@ -76,6 +88,9 @@ export default {
         .then((result) => {
           if (result) {
             console.log('validateForm result', result);
+            console.log('validateForm type', this.type);
+            console.log('validateForm country', this.country);
+            console.log('validateForm companyName', this.companyName);
           }
         });
     },
