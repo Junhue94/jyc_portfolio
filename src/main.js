@@ -13,6 +13,7 @@ import {
 
 // Modules
 import Vue from 'vue';
+import VeeValidate from 'vee-validate';
 
 // Local Files
 import App from './App';
@@ -26,6 +27,14 @@ library.add(faSignOutAlt, faThLarge, faDatabase, faUpload, faCopy);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 // Use third-party modules in Vue
+Vue.use(VeeValidate, {
+  classes: true,
+  classNames: {
+    valid: 'is-valid',
+    invalid: 'is-invalid',
+  },
+  validity: true,
+});
 Vue.use(filters);
 
 Vue.config.productionTip = false;

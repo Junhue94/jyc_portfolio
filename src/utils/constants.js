@@ -12,14 +12,16 @@ export const ROW_PER_PAGE_LABEL = 'Rows';
 export const ROW_PER_PAGE_OPTIONS = [25, 50, 100, 200];
 
 // Entry List
+export const COMPANY_LABEL = 'Company';
 export const ENTRY_TYPE_LABEL = 'Type';
+export const SECTOR_LABEL = 'Sector';
+
 export const ENTRY_TYPE_ENUM = [
   'Buy',
   'Sell',
   'Dividend',
 ];
 
-export const SECTOR_LABEL = 'Sector';
 export const ENTRY_SECTOR_ENUM = [
   'Consumer Staple',
   'REIT',
