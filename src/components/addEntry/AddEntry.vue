@@ -10,53 +10,164 @@
         </div>
         <div class="form-container">
           <form @submit.prevent="validateForm">
-            <validate-input
-              :inputType="'text'"
-              :label="companyLabel"
-              :validationRules="'required'"
-              :onChange="updateFormData"
-            />
-            <validate-select-single
-              :label="countryLabel"
-              :options="countryEnum"
-              :validationRules="'required'"
-              :onChange="updateFormData"
-            />
-            <validate-select-single
-              :label="currencyLabel"
-              :options="currencyEnum"
-              :validationRules="'required'"
-              :onChange="updateFormData"
-            />
-            <validate-select-single
-              :label="sectorLabel"
-              :options="sectorEnum"
-              :validationRules="'required'"
-              :onChange="updateFormData"
-            />
+            <div class="validate-input">
+              <label>{{ companyLabel }}</label>
+              <div class="input-container">
+                <input
+                  :name="companyLabel"
+                  :placeholder="companyLabel"
+                  v-model="companyName"
+                  v-validate="'required'"
+                  type="text"
+                  class="form-control"
+                  autocomplete="off"
+                />
+                <span>{{ errors.first(companyLabel) }}</span>
+              </div>
+            </div>
+            <div class="validate-select-single">
+              <label>{{ countryLabel }}</label>
+              <div class="input-container">
+                <select
+                  :name="countryLabel"
+                  :title="countryLabel"
+                  v-model="country"
+                  v-validate="'required'"
+                  class="form-control"
+                >
+                  <option
+                    value=""
+                    disabled
+                    selected
+                  >Select a {{ countryLabel }}</option>
+                  <option
+                    v-for="option in countryEnum"
+                    :value="option"
+                  >{{ option }}</option>
+                </select>
+                <span>{{ errors.first(countryLabel) }}</span>
+              </div>
+            </div>
+            <div class="validate-select-single">
+              <label>{{ currencyLabel }}</label>
+              <div class="input-container">
+                <select
+                  :name="currencyLabel"
+                  :title="currencyLabel"
+                  v-model="currency"
+                  v-validate="'required'"
+                  class="form-control"
+                >
+                  <option
+                    value=""
+                    disabled
+                    selected
+                  >Select a {{ currencyLabel }}</option>
+                  <option
+                    v-for="option in currencyEnum"
+                    :value="option"
+                  >{{ option }}</option>
+                </select>
+                <span>{{ errors.first(currencyLabel) }}</span>
+              </div>
+            </div>
+            <div class="validate-select-single">
+              <label>{{ sectorLabel }}</label>
+              <div class="input-container">
+                <select
+                  :name="sectorLabel"
+                  :title="sectorLabel"
+                  v-model="sector"
+                  v-validate="'required'"
+                  class="form-control"
+                >
+                  <option
+                    value=""
+                    disabled
+                    selected
+                  >Select a {{ sectorLabel }}</option>
+                  <option
+                    v-for="option in sectorEnum"
+                    :value="option"
+                  >{{ option }}</option>
+                </select>
+                <span>{{ errors.first(sectorLabel) }}</span>
+              </div>
+            </div>
             <hr />
-            <validate-input
-              :inputType="'number'"
-              :label="priceLabel"
-              :validationRules="'required'"
-              :onChange="updateFormData"
-            />
-            <validate-input
-              :inputType="'number'"
-              :label="quantityLabel"
-              :validationRules="'required'"
-              :onChange="updateFormData"
-            />
-            <validate-input
-              :inputType="'number'"
-              :label="profitTargetLabel"
-              :onChange="updateFormData"
-            />
-            <validate-input
-              :inputType="'number'"
-              :label="stopLossLabel"
-              :onChange="updateFormData"
-            />
+            <div class="validate-input">
+              <label>{{ dateLabel }}</label>
+              <div class="input-container">
+                <input
+                  :name="dateLabel"
+                  :placeholder="dateLabel"
+                  v-model="date"
+                  v-validate="'required'"
+                  type="number"
+                  class="form-control"
+                  autocomplete="off"
+                />
+                <span>{{ errors.first(dateLabel) }}</span>
+              </div>
+            </div>
+            <div class="validate-input">
+              <label>{{ priceLabel }}</label>
+              <div class="input-container">
+                <input
+                  :name="priceLabel"
+                  :placeholder="priceLabel"
+                  v-model="price"
+                  v-validate="'required'"
+                  type="number"
+                  class="form-control"
+                  autocomplete="off"
+                />
+                <span>{{ errors.first(priceLabel) }}</span>
+              </div>
+            </div>
+            <div class="validate-input">
+              <label>{{ quantityLabel }}</label>
+              <div class="input-container">
+                <input
+                  :name="quantityLabel"
+                  :placeholder="quantityLabel"
+                  v-model="quantity"
+                  v-validate="'required'"
+                  type="number"
+                  class="form-control"
+                  autocomplete="off"
+                />
+                <span>{{ errors.first(quantityLabel) }}</span>
+              </div>
+            </div>
+            <div class="validate-input">
+              <label>{{ profitTargetLabel }}</label>
+              <div class="input-container">
+                <input
+                  :name="profitTargetLabel"
+                  :placeholder="profitTargetLabel"
+                  v-model="profitTarget"
+                  type="number"
+                  class="form-control"
+                  autocomplete="off"
+                />
+                <span>{{ errors.first(profitTargetLabel) }}</span>
+              </div>
+            </div>
+            <div class="validate-input">
+              <label>{{ stopLossLabel }}</label>
+              <div class="input-container">
+                <input
+                  :name="stopLossLabel"
+                  :placeholder="stopLossLabel"
+                  v-model="stopLoss"
+                  type="number"
+                  class="form-control"
+                  autocomplete="off"
+                />
+                <span>{{ errors.first(stopLossLabel) }}</span>
+              </div>
+            </div>
             <hr />
             <div class="actions-container">
               <custom-button
@@ -76,8 +187,6 @@
 import ContentPage from '../common/ContentPage';
 import CustomButton from '../common/CustomButton';
 import SelectPill from '../common/SelectPill';
-import ValidateInput from '../common/ValidateInput';
-import ValidateSelectSingle from '../common/ValidateSelectSingle';
 import {
   COUNTRY_ENUM,
   COUNTRY_LABEL,
@@ -91,6 +200,7 @@ import {
   QUANTITY_LABEL,
   PROFIT_TARGET_LABEL,
   STOP_LOSS_LABEL,
+  DATE_LABEL,
 } from '../../utils/constants';
 
 export default {
@@ -99,8 +209,6 @@ export default {
     customButton: CustomButton,
     contentPage: ContentPage,
     selectPill: SelectPill,
-    validateInput: ValidateInput,
-    validateSelectSingle: ValidateSelectSingle,
   },
   data() {
     return {
@@ -116,6 +224,7 @@ export default {
       countryLabel: COUNTRY_LABEL,
       currencyLabel: CURRENCY_LABEL,
       sectorLabel: SECTOR_LABEL,
+      dateLabel: DATE_LABEL,
       priceLabel: PRICE_LABEL,
       quantityLabel: QUANTITY_LABEL,
       profitTargetLabel: PROFIT_TARGET_LABEL,
@@ -126,6 +235,7 @@ export default {
       country: null,
       currency: null,
       sector: null,
+      date: null,
       price: null,
       quantity: null,
       profitTarget: null,
@@ -136,38 +246,7 @@ export default {
     setType(type) {
       this.type = type;
     },
-    updateFormData(label, value) {
-      switch (label) {
-        case COMPANY_LABEL:
-          this.companyName = value;
-          break;
-        case COUNTRY_LABEL:
-          this.country = value;
-          break;
-        case CURRENCY_LABEL:
-          this.currency = value;
-          break;
-        case SECTOR_ENUM:
-          this.sector = value;
-          break;
-        case PRICE_LABEL:
-          this.price = value;
-          break;
-        case QUANTITY_LABEL:
-          this.quantity = value;
-          break;
-        case PROFIT_TARGET_LABEL:
-          this.profitTarget = value;
-          break;
-        case STOP_LOSS_LABEL:
-          this.stopLoss = value;
-          break;
-        default:
-          break;
-      }
-    },
     validateForm() {
-      // @TODO $validator.validateAll() does not validate input
       this.$validator
         .validateAll()
         .then((result) => {
@@ -176,6 +255,7 @@ export default {
             console.log('validateForm type', this.type);
             console.log('validateForm country', this.country);
             console.log('validateForm companyName', this.companyName);
+            console.log('validateForm date', this.date);
           }
         });
     },
@@ -185,6 +265,7 @@ export default {
 
 <style scoped lang="scss">
   @import "../../styles/theme";
+  @import "../../styles/form";
 
   .container {
     padding: 0;

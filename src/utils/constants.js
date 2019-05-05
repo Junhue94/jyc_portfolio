@@ -1,6 +1,7 @@
 // GENERAL
 export const COUNTRY_LABEL = 'Country';
 export const CURRENCY_LABEL = 'Currency';
+export const DATE_LABEL = 'Date';
 
 export const COUNTRY_ENUM = [
   'SG',
