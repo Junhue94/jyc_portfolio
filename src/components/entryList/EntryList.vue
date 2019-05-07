@@ -60,11 +60,11 @@ export default {
       header: 'Entry List',
       title: 'Entry List with Filters',
       filterTypeHeader: ENTRY_TYPE_LABEL,
-      filterTypeOptions: ENTRY_TYPE_ENUM,
+      filterTypeOptions: Object.keys(ENTRY_TYPE_ENUM),
       filterCountryHeader: COUNTRY_LABEL,
-      filterCountryOptions: COUNTRY_ENUM,
+      filterCountryOptions: Object.keys(COUNTRY_ENUM),
       filterSectorHeader: SECTOR_LABEL,
-      filterSectorOptions: SECTOR_ENUM,
+      filterSectorOptions: Object.keys(SECTOR_ENUM),
       entryListHeaders: [
         {
           field: 'type',

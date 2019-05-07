@@ -2,20 +2,21 @@
 export const COUNTRY_LABEL = 'Country';
 export const CURRENCY_LABEL = 'Currency';
 export const DATE_LABEL = 'Date';
+export const DATE_FORMAT_LABEL = 'DD-MM-YY';
 
-export const COUNTRY_ENUM = [
-  'SG',
-  'HK',
-  'MY',
-  'US',
-];
+export const COUNTRY_ENUM = {
+  SG: 'SG',
+  HK: 'HK',
+  MY: 'MY',
+  US: 'US',
+};
 
-export const CURRENCY_ENUM = [
-  'SGD',
-  'HKD',
-  'MYR',
-  'USD',
-];
+export const CURRENCY_ENUM = {
+  SGD: 'SGD',
+  HKD: 'HKD',
+  MYR: 'MYR',
+  USD: 'USD',
+};
 
 // List Table
 export const ROW_PER_PAGE_LABEL = 'Rows';
@@ -29,16 +30,17 @@ export const PRICE_LABEL = 'Price';
 export const QUANTITY_LABEL = 'Quantity';
 export const PROFIT_TARGET_LABEL = 'Profit Target';
 export const STOP_LOSS_LABEL = 'Stop Loss';
+export const DIVIDEND_LABEL = 'Dividend';
 
-export const ENTRY_TYPE_ENUM = [
-  'Buy',
-  'Sell',
-  'Dividend',
-];
+export const ENTRY_TYPE_ENUM = {
+  Buy: 'Buy',
+  Sell: 'Sell',
+  Dividend: 'Dividend',
+};
 
-export const SECTOR_ENUM = [
-  'Consumer Staple',
-  'REIT',
-  'Service',
-  'Telecommunication',
-];
+export const SECTOR_ENUM = {
+  'Consumer Staple': 'Consumer Staple',
+  REIT: 'REIT',
+  Service: 'Service',
+  Telecommunication: 'Telecommunication',
+};

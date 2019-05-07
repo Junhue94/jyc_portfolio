@@ -68,7 +68,7 @@ export default {
 
     select {
       height: 45px;
-      min-width: 150px;
+      min-width: 200px;
       padding: 8px 10px;
       border-radius: 0 $border-radius-default $border-radius-default 0;
       font-size: $h3-font-size;
