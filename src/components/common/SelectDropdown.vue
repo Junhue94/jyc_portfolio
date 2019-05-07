@@ -3,7 +3,7 @@
     <div class="label">{{ label }}</div>
     <label>
       <select
-        title="rowOffset"
+        :title="label"
         @change="handleDropdownChange"
       >
         <option
@@ -18,12 +18,23 @@
 <script>
 export default {
   name: 'SelectDropdown',
-  props: [
-    'field',
-    'label',
-    'options',
-    'onChange',
-  ],
+  props: {
+    field: String,
+    label: {
+      type: String,
+      required: true,
+    },
+    options: {
+      type: Array,
+      required: true,
+    },
+    onChange: {
+      type: Function,
+      default() {
+        return null;
+      },
+    },
+  },
   methods: {
     handleDropdownChange(e) {
       e.preventDefault();
@@ -57,7 +68,7 @@ export default {
 
     select {
       height: 45px;
-      min-width: 150px;
+      min-width: 200px;
       padding: 8px 10px;
       border-radius: 0 $border-radius-default $border-radius-default 0;
       font-size: $h3-font-size;

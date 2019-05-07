@@ -1,7 +1,10 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { ENTRY_LIST_ROUTE } from './constants';
-import { GET_ENTRY_LIST } from './_mock/entryListResult';
+import { ENTRY_ROUTE } from './constants';
+import {
+  CREATE_ENTRY,
+  GET_ENTRY_LIST,
+} from './_mock/entryListResult';
 
 const apiService = axios.create({
   baseURL: 'http://localhost:3000/api/',
@@ -11,12 +14,12 @@ const apiService = axios.create({
 
 const mockApiService = new MockAdapter(apiService);
 
-// mockApiService
-//   .onGet(ENTRY_LIST_ROUTE)
-//   .reply(200, GET_ENTRY_LIST);
+mockApiService
+  .onPost(ENTRY_ROUTE)
+  .reply(200, CREATE_ENTRY);
 
 mockApiService
-  .onGet(ENTRY_LIST_ROUTE)
+  .onGet(ENTRY_ROUTE)
   .reply((config) => {
     if (config.params) {
       const {

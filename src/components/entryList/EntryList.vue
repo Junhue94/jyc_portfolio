@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import ContentPage from '../common/ContentPage';
 import ListTable from '../common/ListTable';
 import SelectDropdown from '../common/SelectDropdown';
@@ -45,7 +45,7 @@ import {
   COUNTRY_LABEL,
   COUNTRY_ENUM,
   SECTOR_LABEL,
-  ENTRY_SECTOR_ENUM,
+  SECTOR_ENUM,
 } from '../../utils/constants';
 
 export default {
@@ -57,14 +57,14 @@ export default {
   },
   data() {
     return {
-      filterTypeHeader: ENTRY_TYPE_LABEL,
-      filterTypeOptions: ENTRY_TYPE_ENUM,
-      filterCountryHeader: COUNTRY_LABEL,
-      filterCountryOptions: COUNTRY_ENUM,
-      filterSectorHeader: SECTOR_LABEL,
-      filterSectorOptions: ENTRY_SECTOR_ENUM,
       header: 'Entry List',
       title: 'Entry List with Filters',
+      filterTypeHeader: ENTRY_TYPE_LABEL,
+      filterTypeOptions: Object.keys(ENTRY_TYPE_ENUM),
+      filterCountryHeader: COUNTRY_LABEL,
+      filterCountryOptions: Object.keys(COUNTRY_ENUM),
+      filterSectorHeader: SECTOR_LABEL,
+      filterSectorOptions: Object.keys(SECTOR_ENUM),
       entryListHeaders: [
         {
           field: 'type',
@@ -171,15 +171,15 @@ export default {
     },
   },
   computed: {
-    ...mapGetters('entryList', {
-      entryListGetter: 'entryList',
-      entryListParamsGetter: 'entryListParams',
+    ...mapState('entryList', {
+      entryListState: 'entryList',
+      entryListParamsState: 'entryListParams',
     }),
     entryList() {
-      return this.entryListGetter;
+      return this.entryListState;
     },
     entryListParams() {
-      return this.entryListParamsGetter;
+      return this.entryListParamsState;
     },
   },
   created() {
@@ -200,7 +200,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-bottom: 2px solid $background-light-gray;;
+    border-bottom: 2px solid $background-light-gray;
   }
 
   .table-container {

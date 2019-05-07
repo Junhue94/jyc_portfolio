@@ -1,6 +1,7 @@
 // All External CSS Files
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'toastr/build/toastr.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -13,6 +14,7 @@ import {
 
 // Modules
 import Vue from 'vue';
+import VeeValidate from 'vee-validate';
 
 // Local Files
 import App from './App';
@@ -26,6 +28,13 @@ library.add(faSignOutAlt, faThLarge, faDatabase, faUpload, faCopy);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 // Use third-party modules in Vue
+Vue.use(VeeValidate, {
+  classes: true,
+  classNames: {
+    valid: 'is-valid',
+    invalid: 'is-invalid',
+  },
+});
 Vue.use(filters);
 
 Vue.config.productionTip = false;

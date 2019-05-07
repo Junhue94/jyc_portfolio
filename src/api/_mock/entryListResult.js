@@ -1,3 +1,20 @@
+export const CREATE_ENTRY = {
+  id: 1,
+  type: 'Buy',
+  companyName: 'Singtel',
+  country: 'SG',
+  currency: 'SGD',
+  sector: 'Telecommunication',
+  date: new Date(),
+  price: 3.1,
+  quantity: 5000,
+  profitTarget: 4.4,
+  stopLoss: 2.2,
+  dividend: 439.09,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
 export const GET_ENTRY_LIST = [
   {
     id: 1,
