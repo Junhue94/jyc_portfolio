@@ -369,6 +369,7 @@ export default {
       profitTargetLabel: PROFIT_TARGET_LABEL,
       stopLossLabel: STOP_LOSS_LABEL,
       dividendLabel: DIVIDEND_LABEL,
+      type: null,
     };
   },
   methods: {
