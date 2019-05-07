@@ -1,6 +1,7 @@
 // All External CSS Files
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'toastr/build/toastr.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {

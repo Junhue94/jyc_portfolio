@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import ContentPage from '../common/ContentPage';
 import ListTable from '../common/ListTable';
 import SelectDropdown from '../common/SelectDropdown';
@@ -171,15 +171,15 @@ export default {
     },
   },
   computed: {
-    ...mapGetters('entryList', {
-      entryListGetter: 'entryList',
-      entryListParamsGetter: 'entryListParams',
+    ...mapState('entryList', {
+      entryListState: 'entryList',
+      entryListParamsState: 'entryListParams',
     }),
     entryList() {
-      return this.entryListGetter;
+      return this.entryListState;
     },
     entryListParams() {
-      return this.entryListParamsGetter;
+      return this.entryListParamsState;
     },
   },
   created() {

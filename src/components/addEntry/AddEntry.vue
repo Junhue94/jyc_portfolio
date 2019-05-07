@@ -18,7 +18,7 @@
                     :name="companyLabel"
                     :placeholder="companyLabel"
                     :key="`buy${companyLabel}`"
-                    v-model="companyName"
+                    v-model="entry.companyName"
                     v-validate="'required'"
                     type="text"
                     class="form-control"
@@ -33,7 +33,7 @@
                   <select
                     :name="countryLabel"
                     :title="countryLabel"
-                    v-model="country"
+                    v-model="entry.country"
                     v-validate="'required'"
                     class="form-control"
                   >
@@ -56,7 +56,7 @@
                   <select
                     :name="currencyLabel"
                     :title="currencyLabel"
-                    v-model="currency"
+                    v-model="entry.currency"
                     v-validate="'required'"
                     class="form-control"
                   >
@@ -79,7 +79,7 @@
                   <select
                     :name="sectorLabel"
                     :title="sectorLabel"
-                    v-model="sector"
+                    v-model="entry.sector"
                     v-validate="'required'"
                     class="form-control"
                   >
@@ -104,7 +104,7 @@
                     :name="dateLabel"
                     :placeholder="dateFormatLabel"
                     :key="`buy${dateLabel}`"
-                    v-model="date"
+                    v-model="entry.date"
                     v-validate="'required'"
                     type="text"
                     class="form-control"
@@ -120,7 +120,7 @@
                     :name="priceLabel"
                     :placeholder="priceLabel"
                     :key="`buy${priceLabel}`"
-                    v-model="price"
+                    v-model="entry.price"
                     v-validate="'required'"
                     type="number"
                     class="form-control"
@@ -136,7 +136,7 @@
                     :name="quantityLabel"
                     :placeholder="quantityLabel"
                     :key="`buy${quantityLabel}`"
-                    v-model="quantity"
+                    v-model="entry.quantity"
                     v-validate="'required'"
                     type="number"
                     class="form-control"
@@ -152,7 +152,7 @@
                     :name="profitTargetLabel"
                     :placeholder="profitTargetLabel"
                     :key="`buy${profitTargetLabel}`"
-                    v-model="profitTarget"
+                    v-model="entry.profitTarget"
                     type="number"
                     class="form-control"
                     autocomplete="off"
@@ -167,7 +167,7 @@
                     :name="stopLossLabel"
                     :placeholder="stopLossLabel"
                     :key="`buy${stopLossLabel}`"
-                    v-model="stopLoss"
+                    v-model="entry.stopLoss"
                     type="number"
                     class="form-control"
                     autocomplete="off"
@@ -184,7 +184,7 @@
                     :name="companyLabel"
                     :placeholder="companyLabel"
                     :key="`sell${companyLabel}`"
-                    v-model="companyName"
+                    v-model="entry.companyName"
                     v-validate="'required'"
                     type="text"
                     class="form-control"
@@ -200,7 +200,7 @@
                     :name="dateLabel"
                     :placeholder="dateFormatLabel"
                     :key="`sell${dateLabel}`"
-                    v-model="date"
+                    v-model="entry.date"
                     v-validate="'required'"
                     type="text"
                     class="form-control"
@@ -216,7 +216,7 @@
                     :name="priceLabel"
                     :placeholder="priceLabel"
                     :key="`sell${priceLabel}`"
-                    v-model="price"
+                    v-model="entry.price"
                     v-validate="'required'"
                     type="number"
                     class="form-control"
@@ -232,7 +232,7 @@
                     :name="quantityLabel"
                     :placeholder="quantityLabel"
                     :key="`sell${quantityLabel}`"
-                    v-model="quantity"
+                    v-model="entry.quantity"
                     v-validate="'required'"
                     type="number"
                     class="form-control"
@@ -259,7 +259,7 @@
                     :name="companyLabel"
                     :placeholder="companyLabel"
                     :key="`dividend${companyLabel}`"
-                    v-model="companyName"
+                    v-model="entry.companyName"
                     v-validate="'required'"
                     type="text"
                     class="form-control"
@@ -275,7 +275,7 @@
                     :name="dateLabel"
                     :placeholder="dateFormatLabel"
                     :key="`dividend${dateLabel}`"
-                    v-model="date"
+                    v-model="entry.date"
                     v-validate="'required'"
                     type="text"
                     class="form-control"
@@ -291,7 +291,7 @@
                     :name="dividendLabel"
                     :placeholder="dividendLabel"
                     :key="`dividend${dividendLabel}`"
-                    v-model="dividend"
+                    v-model="entry.dividend"
                     v-validate="'required'"
                     type="number"
                     class="form-control"
@@ -317,9 +317,12 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import ContentPage from '../common/ContentPage';
 import CustomButton from '../common/CustomButton';
 import SelectPill from '../common/SelectPill';
+import { logError } from '../../utils/logger';
+import { toastServerError, toastSuccess } from '../../utils/toaster';
 import {
   COUNTRY_ENUM,
   COUNTRY_LABEL,
@@ -366,36 +369,42 @@ export default {
       profitTargetLabel: PROFIT_TARGET_LABEL,
       stopLossLabel: STOP_LOSS_LABEL,
       dividendLabel: DIVIDEND_LABEL,
-      // Form data model
-      type: null,
-      companyName: null,
-      country: null,
-      currency: null,
-      sector: null,
-      date: null,
-      price: null,
-      quantity: null,
-      profitTarget: null,
-      stopLoss: null,
-      dividend: null,
     };
   },
   methods: {
+    ...mapActions('entry', {
+      clearStateAction: 'clearState',
+      createEntryAction: 'createEntry',
+    }),
     setType(type) {
       this.type = type;
     },
     validateForm() {
       this.$validator
         .validateAll()
-        .then((result) => {
-          if (result) {
-            console.log('validateForm result', result);
-            console.log('validateForm type', this.type);
-            console.log('validateForm country', this.country);
-            console.log('validateForm companyName', this.companyName);
-            console.log('validateForm date', this.date);
+        .then((isFormValid) => {
+          if (isFormValid) {
+            this.createEntryAction(this.entry)
+              .then(() => {
+                this.clearStateAction();
+                // Reset Form
+                this.$validator.reset();
+                toastSuccess('Create Entry', 'Successfully created');
+              })
+              .catch((err) => {
+                logError(err);
+                toastServerError();
+              });
           }
         });
+    },
+  },
+  computed: {
+    ...mapState('entry', {
+      entryState: 'entry',
+    }),
+    entry() {
+      return this.entryState;
     },
   },
 };
@@ -424,6 +433,6 @@ export default {
 
   .actions-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 </style>

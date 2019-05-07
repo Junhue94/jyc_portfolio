@@ -1,21 +1,8 @@
 import apiService from '../api';
-import { ENTRY_LIST_ROUTE } from '../api/constants';
+import { ENTRY_ROUTE } from '../api/constants';
 import { getQueryParams } from '../utils/helper';
 
 const getDefaultState = () => ({
-  entryId: null,
-  entryBuy: {
-    type: null,
-    name: null,
-    country: null,
-    currency: null,
-    sector: null,
-    buyDate: null,
-    buyPrice: null,
-    buyQuantity: null,
-    profitTarget: null,
-    stopLoss: null,
-  },
   entryList: [],
   entryListParams: {
     offset: 25,
@@ -31,9 +18,6 @@ const getDefaultState = () => ({
 const state = getDefaultState();
 
 const mutations = {
-  'SET_ENTRY_ID'(state, entryId) {
-    state.entryId = entryId;
-  },
   'SET_ENTRY_LIST'(state, entryList) {
     state.entryList = [...entryList];
   },
@@ -49,7 +33,7 @@ const mutations = {
 
 const actions = {
   getEntryList({ commit }, options) {
-    return apiService.get(ENTRY_LIST_ROUTE, { params: options })
+    return apiService.get(ENTRY_ROUTE, { params: options })
       .then(({ data }) => {
         commit('SET_ENTRY_LIST', data.data);
         commit('SET_ENTRY_LIST_PARAMS', getQueryParams(data));
@@ -61,22 +45,9 @@ const actions = {
   },
 };
 
-const getters = {
-  entryId(state) {
-    return state.entryId;
-  },
-  entryList(state) {
-    return state.entryList;
-  },
-  entryListParams(state) {
-    return state.entryListParams;
-  },
-};
-
 export default {
   namespaced: true,
   state,
   mutations,
   actions,
-  getters,
 };
