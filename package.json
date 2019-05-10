@@ -1,5 +1,5 @@
 {
-  "name": "jyc_stock_data",
+  "name": "jyc_portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit --reporter=min"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
