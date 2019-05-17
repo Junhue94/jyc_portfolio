@@ -1,6 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { ENTRY_ROUTE } from './constants';
+import { PAGE_PARAMS } from './_mock/common';
 import {
   CREATE_ENTRY,
   GET_ENTRY_LIST,
@@ -22,23 +23,11 @@ mockApiService
   .onGet(ENTRY_ROUTE)
   .reply((config) => {
     if (config.params) {
-      const {
-        offset,
-        currentPage,
-        sortField,
-        sortSeq,
-        filter,
-      } = config.params;
       return [
         200,
         {
-          offset,
-          currentPage,
-          totalRows: 500,
-          totalPage: 5,
-          sortField,
-          sortSeq,
-          filter,
+          ...PAGE_PARAMS,
+          ...config.params,
           data: GET_ENTRY_LIST,
         },
       ];
