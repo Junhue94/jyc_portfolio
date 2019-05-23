@@ -380,24 +380,22 @@ export default {
     setType(type) {
       this.type = type;
     },
-    validateForm() {
-      this.$validator
-        .validateAll()
-        .then((isFormValid) => {
-          if (isFormValid) {
-            this.createEntryAction(this.entry)
-              .then(() => {
-                this.clearStateAction();
-                // Reset Form
-                this.$validator.reset();
-                toastSuccess('Create Entry', 'Successfully created');
-              })
-              .catch((err) => {
-                logError(err);
-                toastServerError();
-              });
-          }
-        });
+    async validateForm() {
+      const isFormValid = await this.$validator.validateAll();
+
+      if (isFormValid) {
+        this.createEntryAction(this.entry)
+          .then(() => {
+            this.clearStateAction();
+            // Reset Form
+            this.$validator.reset();
+            toastSuccess('Create Entry', 'Successfully created');
+          })
+          .catch((err) => {
+            logError(err);
+            toastServerError();
+          });
+      }
     },
   },
   computed: {
