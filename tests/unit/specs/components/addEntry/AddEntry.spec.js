@@ -39,15 +39,15 @@ describe('AddEntry.vue', () => {
   describe('Methods', () => {
     describe('setType', () => {
       it('should set props `type`', () => {
+        const updatedType = 'Buy';
         const wrapper = shallowMount(AddEntry, {
           localVue,
           store,
+          mocks: {
+            type: null,
+          },
         });
 
-        const updatedType = 'Buy';
-
-        // Set data `type`
-        wrapper.setData({ type: null });
         wrapper.vm.setType(updatedType);
         assert.equal(wrapper.vm.type, updatedType);
       });
