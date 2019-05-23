@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import {
   number,
   money,
@@ -8,7 +9,7 @@ import {
 } from './date';
 
 export default {
-  install(Vue) {
+  install() {
     Vue.filter('number', number);
     Vue.filter('money', money);
     Vue.filter('price', price);

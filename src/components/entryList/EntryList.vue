@@ -146,7 +146,7 @@ export default {
         });
     },
     handleTypeChange(value) {
-      this.getEntryList({
+      this.getEntryListAction({
         ...this.entryListParams,
         filter: {
           type: value,
@@ -154,7 +154,7 @@ export default {
       });
     },
     handleCountryChange(value) {
-      this.getEntryList({
+      this.getEntryListAction({
         ...this.entryListParams,
         filter: {
           country: value,
@@ -162,7 +162,7 @@ export default {
       });
     },
     handleSectorChange(value) {
-      this.getEntryList({
+      this.getEntryListAction({
         ...this.entryListParams,
         filter: {
           sector: value,

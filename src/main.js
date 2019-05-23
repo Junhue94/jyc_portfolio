@@ -20,22 +20,18 @@ import VeeValidate from 'vee-validate';
 import App from './App';
 import router from './router';
 import store from './store';
-import filters from './filters';
+import Filters from './filters';
 import './registerServiceWorker';
+
+import { veeValidateConfig } from './utils/config';
 
 // Fonts
 library.add(faSignOutAlt, faThLarge, faDatabase, faUpload, faCopy);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 // Use third-party modules in Vue
-Vue.use(VeeValidate, {
-  classes: true,
-  classNames: {
-    valid: 'is-valid',
-    invalid: 'is-invalid',
-  },
-});
-Vue.use(filters);
+Vue.use(VeeValidate, veeValidateConfig);
+Vue.use(Filters);
 
 Vue.config.productionTip = false;
 

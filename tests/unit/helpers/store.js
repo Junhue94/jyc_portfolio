@@ -23,6 +23,7 @@ export const actionHelper = (action, payload, state, expectedMutations, done) =>
         assert.deepEqual(mutation.payload, payload);
       }
     } catch (error) {
+      console.log(error);
       done(error);
     }
 

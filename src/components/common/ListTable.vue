@@ -216,7 +216,7 @@ export default {
       const { offset, currentPage, totalPage } = this.queryParams;
       const newPage = this.setNewPage(page);
 
-      // set page range
+      // Set page range
       if (totalPage <= 5) {
         this.pageRange = range(1, totalPage + 1);
       } else if (newPage + 2 >= totalPage) {
