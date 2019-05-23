@@ -6,6 +6,9 @@ import AppSideNav from '@/layouts/appLayout/AppSideNav';
 const localVue = createLocalVue();
 // Stubs child components
 const stubs = ['router-link', 'font-awesome-icon'];
+const mocks = {
+  activeItem: null,
+};
 
 describe('AppSideNav.vue', () => {
   describe('Methods', () => {
@@ -15,9 +18,7 @@ describe('AppSideNav.vue', () => {
         const wrapper = shallowMount(AppSideNav, {
           localVue,
           stubs,
-          mocks: {
-            activeItem: null,
-          },
+          mocks,
         });
 
         wrapper.vm.onMenuItemClick(updatedActiveItem);
@@ -34,7 +35,7 @@ describe('AppSideNav.vue', () => {
           localVue,
           stubs,
           mocks: {
-            activeItem: null,
+            ...mocks,
             $router: {
               history: {
                 current: {
