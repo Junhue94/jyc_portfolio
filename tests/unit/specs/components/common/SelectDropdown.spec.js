@@ -7,7 +7,7 @@ import { mockEvent } from '../../../helpers/utils';
 const localVue = createLocalVue();
 const requiredProps = {
   label: '',
-  options: '',
+  options: [],
 };
 
 describe('SelectDropdown.vue', () => {
